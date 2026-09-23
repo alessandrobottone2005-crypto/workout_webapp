@@ -106,7 +106,6 @@ Tutti i dati sono su IndexedDB (`WorkoutAppDB`). Non c'è backend, non c'è sinc
 
 ## Limitazioni note
 
-- **Apple Health**: non disponibile da PWA. Richiede wrapper app nativa (Capacitor/Expo).
 - **Background timer iOS**: iOS Safari può throttlare i timer quando l'app è in background. Il timer usa `endAt` timestamps per recuperare il tempo corretto alla riapertura.
 - **Notifiche push**: non implementate in V1.
 - **Vibrazione**: supportata solo dove disponibile `navigator.vibrate` (non iOS Safari).
