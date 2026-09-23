@@ -9,3 +9,5 @@ qa-output/
 .env.*
 !.env.example
 *.log
+.vercel
+.env*
