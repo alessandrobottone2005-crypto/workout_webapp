@@ -97,15 +97,15 @@ export const WorkoutCompletedScreen: React.FC = () => {
 
   return (
     <AppShell showNav={false}>
-      <div className="flex-1 flex flex-col items-center justify-center px-5 pb-[calc(40px+env(safe-area-inset-bottom))]">
-        {/* Success icon */}
+      <div className="flex-1 flex flex-col items-start justify-center px-5 pb-[calc(40px+env(safe-area-inset-bottom))]">
+        {/* Success icon — 64px lime Check (Figma) */}
         <motion.div
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ type: 'spring', damping: 12, stiffness: 180 }}
-          className="w-24 h-24 rounded-full bg-accent-primary/15 border border-accent-primary/30 flex items-center justify-center mb-6"
+          className="mb-4"
         >
-          <Check className="w-12 h-12 text-accent-primary" />
+          <Check className="w-16 h-16 text-accent-primary" strokeWidth={2} />
         </motion.div>
 
         {/* Title */}
@@ -113,39 +113,43 @@ export const WorkoutCompletedScreen: React.FC = () => {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="text-center mb-8"
+          className="mb-4 w-full"
         >
-          <h1 className="text-[32px] font-bold text-text-primary leading-tight whitespace-pre-line">
+          <h1 className="screen-title text-[28px] leading-[38px] tracking-[-0.42px] whitespace-pre-line">
             {strings.workoutComplete.title}
           </h1>
-          <p className="text-meta text-accent-primary mt-2 font-semibold uppercase tracking-wider">
-            {workout.sessionNameSnapshot}
+          <p className="text-[16px] font-semibold text-text-secondary mt-3 whitespace-pre">
+            {formatDuration(duration)}
+            {'     '}
+            {completedExLogs.length} esercizi
+            {'     '}
+            {totalSets} serie
           </p>
         </motion.div>
 
-        {/* Stats */}
+        {/* Stats (E2E labels) */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="w-full bg-bg-surface rounded-card border border-border-default p-5 mb-5"
+          className="w-full mb-5"
         >
-          <div className="grid grid-cols-3 gap-4 text-center">
+          <div className="grid grid-cols-3 gap-4 text-left">
             <div>
               <p className="text-[28px] font-bold text-text-primary">
                 {formatDuration(duration)}
               </p>
-              <p className="text-label-sm text-text-secondary mt-1">Durata</p>
+              <p className="text-label-sm text-text-secondary mt-1">DURATA</p>
             </div>
             <div>
               <p className="text-[28px] font-bold text-text-primary">
                 {completedExLogs.length}
               </p>
-              <p className="text-label-sm text-text-secondary mt-1">Esercizi</p>
+              <p className="text-label-sm text-text-secondary mt-1">ESERCIZI</p>
             </div>
             <div>
               <p className="text-[28px] font-bold text-text-primary">{totalSets}</p>
-              <p className="text-label-sm text-text-secondary mt-1">Serie</p>
+              <p className="text-label-sm text-text-secondary mt-1">SERIE</p>
             </div>
           </div>
         </motion.div>

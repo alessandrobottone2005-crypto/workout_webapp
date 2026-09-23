@@ -8,7 +8,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, ChevronLeft } from 'lucide-react';
 import { AppShell } from '@/components/layout';
-import { Button, NumericStepper } from '@/components/ui';
+import { Button, NumericStepper, IconButton } from '@/components/ui';
 import { RestPresets } from '@/features/timer/TimerComponents';
 import { useWorkoutStore } from '@/stores/workoutStore';
 import { useTimerStore } from '@/features/timer/timerStore';
@@ -195,14 +195,14 @@ export const ExerciseFocusScreen: React.FC = () => {
         {/* Header */}
         <div className="pt-[calc(env(safe-area-inset-top)+8px)] px-5">
           <div className="flex items-center justify-between h-14">
-            <button
+            <IconButton
+              label="Torna alla panoramica"
               onClick={() => navigate(`/workout/${workout.id}`)}
-              className="flex items-center gap-1 min-h-[44px] text-text-secondary hover:text-text-primary transition-colors"
-              aria-label="Torna alla panoramica"
+              className="-ml-1.5 w-auto min-w-[44px] gap-1 rounded-none"
             >
-              <ChevronLeft className="w-5 h-5" />
-              <span className="text-meta">{workout.sessionNameSnapshot}</span>
-            </button>
+              <ChevronLeft className="w-5 h-5" strokeWidth={2} />
+              <span className="text-meta text-text-secondary">{workout.sessionNameSnapshot}</span>
+            </IconButton>
             <span className="text-meta text-text-secondary">
               {exerciseIndex + 1} / {sortedLogs.length}
             </span>
@@ -215,7 +215,7 @@ export const ExerciseFocusScreen: React.FC = () => {
             key={exerciseLog.id}
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-[32px] font-bold text-text-primary leading-tight uppercase"
+            className="screen-title text-[26px] leading-[1.15] uppercase tracking-[-0.42px]"
           >
             {exerciseLog.exerciseNameSnapshot}
           </motion.h1>
@@ -384,30 +384,29 @@ const ExerciseCompletedScreen: React.FC<ExerciseCompletedProps> = ({
   onContinue,
 }) => (
   <AppShell showNav={false}>
-    <div className="flex-1 flex flex-col items-center justify-center px-5 pb-[calc(40px+env(safe-area-inset-bottom))]">
+    <div className="flex-1 flex flex-col items-start justify-center px-5 pb-[calc(40px+env(safe-area-inset-bottom))]">
       <motion.div
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ type: 'spring', damping: 15, stiffness: 200, delay: 0.1 }}
-        className="w-24 h-24 rounded-full bg-accent-primary/15 border border-accent-primary/30 flex items-center justify-center mb-8"
+        className="mb-4"
       >
-        <Check className="w-12 h-12 text-accent-primary" />
+        <Check className="w-16 h-16 text-accent-primary" strokeWidth={2} />
       </motion.div>
 
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.25 }}
-        className="text-center mb-8"
+        className="mb-6 w-full"
       >
-        <h2 className="text-[28px] font-bold text-text-primary">
+        <h2 className="screen-title text-[28px] leading-[38px] tracking-[-0.42px] uppercase">
           {exerciseLog.exerciseNameSnapshot.toUpperCase()}
-        </h2>
-        <p className="text-heading text-accent-primary mt-1">
+          <br />
           COMPLETATA
-        </p>
-        <p className="text-meta text-text-secondary mt-3">
-          {exerciseLog.setLogs.length} serie
+        </h2>
+        <p className="text-body text-text-secondary mt-3">
+          {exerciseLog.setLogs.length} serie completate
         </p>
       </motion.div>
 
@@ -416,17 +415,13 @@ const ExerciseCompletedScreen: React.FC<ExerciseCompletedProps> = ({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.35 }}
-        className="w-full bg-bg-surface rounded-card border border-border-default p-4 mb-8"
+        className="w-full mb-8"
       >
         {exerciseLog.setLogs.map((s, i) => (
-          <div
-            key={s.id}
-            className={`flex items-center justify-between py-2 ${
-              i < exerciseLog.setLogs.length - 1 ? 'border-b border-border-default' : ''
-            }`}
-          >
-            <span className="text-meta text-text-secondary">Serie {i + 1}</span>
-            <span className="text-meta text-text-primary font-semibold">
+          <div key={s.id} className="py-1">
+            <span className="text-[20px] font-semibold text-text-primary">
+              {String(i + 1).padStart(2, '0')}
+              {'   '}
               {formatWeight(s.weight)} × {s.reps}
             </span>
           </div>
@@ -437,7 +432,7 @@ const ExerciseCompletedScreen: React.FC<ExerciseCompletedProps> = ({
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="w-full"
+        className="w-full mt-auto"
       >
         <Button variant="primary" fullWidth onClick={onContinue}>
           {strings.workout.continueCta}

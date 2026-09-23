@@ -165,7 +165,7 @@ export const EditSessionScreen: React.FC = () => {
   if (!session) {
     return (
       <AppShell showNav={false}>
-        <ScreenHeader title="Modifica Seduta" showBack />
+        <ScreenHeader title="MODIFICA SEDUTA" showBack titleSize="sm" />
         <div className="flex-1 flex items-center justify-center">
           <div className="w-8 h-8 rounded-full border-2 border-accent-primary border-t-transparent animate-spin" />
         </div>

@@ -13,8 +13,13 @@
   --color-text-secondary: #8E8E93;
   --color-border-default: #2C2C2E;
   --color-accent-primary: #C8FF3D;
+  --color-icon-primary: #F5F5F7;
+  --color-icon-secondary: #8E8E93;
+  --color-icon-accent: #C8FF3D;
+  --color-icon-on-accent: #09090A;
   --color-danger: #FF453A;
   --color-warning: #FFD60A;
+  --font-display: 'Syne', sans-serif;
 
   /* Radius */
   --radius-sm: 10px;
@@ -118,6 +123,29 @@ a {
 }
 
 /* Typography utilities */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.screen-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  color: var(--color-text-primary);
+}
+
+/* Icon tokens (24×24, stroke 2px default via lucide) */
+.icon-primary {
+  color: var(--color-icon-primary);
+}
+.icon-secondary {
+  color: var(--color-icon-secondary);
+}
+.icon-accent {
+  color: var(--color-icon-accent);
+}
+
 .text-display {
   font-size: 40px;
   font-weight: 700;

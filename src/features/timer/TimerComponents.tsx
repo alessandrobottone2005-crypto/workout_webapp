@@ -8,7 +8,7 @@
 
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
+import { X, Timer, Check } from 'lucide-react';
 import { useTimerStore, playTimerBeep, vibrateTimerComplete } from './timerStore';
 import { settingsRepo } from '@/db/repositories';
 import { formatTimerSeconds } from '@/lib/formatters';
@@ -176,10 +176,7 @@ export const RestTimerLayer: React.FC<RestTimerLayerProps> = ({ hasNav }) => {
             >
               {!pillCompleted ? (
                 <>
-                  <span className="relative flex w-2 h-2">
-                    <span className="absolute inset-0 bg-accent-primary rounded-full animate-ping" />
-                    <span className="relative w-2 h-2 bg-accent-primary rounded-full" />
-                  </span>
+                  <Timer className="w-[18px] h-[18px] text-icon-accent" strokeWidth={2} aria-hidden />
                   <span className="text-label-sm text-text-secondary uppercase tracking-wider">
                     {strings.timer.rest}
                   </span>
@@ -188,9 +185,12 @@ export const RestTimerLayer: React.FC<RestTimerLayerProps> = ({ hasNav }) => {
                   </span>
                 </>
               ) : (
-                <span className="text-label-sm font-bold text-bg-app uppercase tracking-wider">
-                  {strings.timer.restDone}
-                </span>
+                <>
+                  <Check className="w-[18px] h-[18px] text-bg-app" strokeWidth={2.5} aria-hidden />
+                  <span className="text-label-sm font-bold text-bg-app uppercase tracking-wider">
+                    {strings.timer.restDone}
+                  </span>
+                </>
               )}
             </motion.button>
           </AnimatePresence>
@@ -279,15 +279,18 @@ const RestTimerSheet: React.FC<RestTimerSheetProps> = ({ onClose }) => {
 
         {/* Header */}
         <div className="flex items-center justify-between px-5 pt-2 pb-2">
-          <p className="text-label-sm text-text-secondary uppercase tracking-wider">
-            {isCompleted ? strings.timer.restDone : strings.timer.rest}
-          </p>
+          <div className="flex items-center gap-2">
+            <Timer className="w-7 h-7 text-icon-accent" strokeWidth={2} aria-hidden />
+            <p className="text-label-sm text-accent-primary uppercase tracking-[1.4px]">
+              {isCompleted ? strings.timer.restDone : strings.timer.rest}
+            </p>
+          </div>
           <button
             onClick={onClose}
             aria-label={strings.timer.dismiss}
             className="w-11 h-11 -mr-2 flex items-center justify-center text-text-secondary hover:text-text-primary"
           >
-            <X className="w-5 h-5" />
+            <X className="w-5 h-5" strokeWidth={2} />
           </button>
         </div>
 

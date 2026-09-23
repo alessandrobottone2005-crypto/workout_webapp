@@ -5,8 +5,8 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronLeft } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { ChevronLeft, Home, ClipboardList, BarChart2, CalendarDays } from 'lucide-react';
+import { IconButton, ScreenTitle } from '@/components/ui';
 
 interface ScreenHeaderProps {
   title: string;
@@ -15,6 +15,10 @@ interface ScreenHeaderProps {
   onBack?: () => void;
   rightAction?: React.ReactNode;
   transparent?: boolean;
+  /** Left-aligned Syne ExtraBold display title (root tab screens) */
+  variant?: 'centered' | 'display';
+  /** Display title size: sm=24 md=26 lg=28 xl=30 */
+  titleSize?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
 export const ScreenHeader: React.FC<ScreenHeaderProps> = ({
@@ -24,6 +28,8 @@ export const ScreenHeader: React.FC<ScreenHeaderProps> = ({
   onBack,
   rightAction,
   transparent = false,
+  variant = 'centered',
+  titleSize = 'lg',
 }) => {
   const navigate = useNavigate();
 
@@ -35,6 +41,28 @@ export const ScreenHeader: React.FC<ScreenHeaderProps> = ({
     }
   };
 
+  if (variant === 'display') {
+    return (
+      <header
+        className={`sticky top-0 z-30 pt-[env(safe-area-inset-top)] ${
+          transparent ? 'bg-transparent' : 'bg-bg-app/95 backdrop-blur-md'
+        }`}
+      >
+        <div className="flex items-start justify-between gap-3 px-5 pt-4 pb-3">
+          <div className="min-w-0 flex-1">
+            <ScreenTitle size={titleSize} className="break-words">
+              {title}
+            </ScreenTitle>
+            {subtitle && (
+              <p className="text-body text-text-secondary mt-1.5">{subtitle}</p>
+            )}
+          </div>
+          <div className="flex-shrink-0 pt-0.5">{rightAction}</div>
+        </div>
+      </header>
+    );
+  }
+
   return (
     <header
       className={`sticky top-0 z-30 pt-[env(safe-area-inset-top)] ${
@@ -43,22 +71,17 @@ export const ScreenHeader: React.FC<ScreenHeaderProps> = ({
     >
       <div className="flex items-center justify-between px-5 h-14">
         {/* Left: Back button */}
-        <div className="w-10">
+        <div className="w-11">
           {showBack && (
-            <motion.button
-              whileTap={{ scale: 0.9 }}
-              onClick={handleBack}
-              aria-label="Indietro"
-              className="w-11 h-11 flex items-center justify-center -ml-2 text-text-secondary hover:text-text-primary active:text-text-primary"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </motion.button>
+            <IconButton label="Indietro" onClick={handleBack} className="-ml-1.5">
+              <ChevronLeft className="w-6 h-6" strokeWidth={2} />
+            </IconButton>
           )}
         </div>
 
         {/* Center: Title */}
-        <div className="flex-1 text-center">
-          <p className="text-label-sm text-text-secondary tracking-widest uppercase">
+        <div className="flex-1 text-center min-w-0">
+          <p className="text-label-sm text-text-secondary tracking-widest uppercase truncate">
             {title}
           </p>
           {subtitle && (
@@ -67,7 +90,7 @@ export const ScreenHeader: React.FC<ScreenHeaderProps> = ({
         </div>
 
         {/* Right: Action */}
-        <div className="w-10 flex justify-end">{rightAction}</div>
+        <div className="w-11 flex justify-end">{rightAction}</div>
       </div>
     </header>
   );
@@ -78,7 +101,6 @@ export const ScreenHeader: React.FC<ScreenHeaderProps> = ({
    ============================================ */
 
 import { Link, useLocation } from 'react-router-dom';
-import { Home, ClipboardList, BarChart2, CalendarDays } from 'lucide-react';
 
 const NAV_ITEMS = [
   { to: '/', label: 'Home', icon: Home },
@@ -96,8 +118,8 @@ export const BottomNavigation: React.FC = () => {
       aria-label="Navigazione principale"
     >
       <div
-        className="flex items-stretch"
-        style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
+        className="flex items-stretch justify-between px-[22px] pt-[10px] pb-[20px]"
+        style={{ paddingBottom: 'calc(20px + env(safe-area-inset-bottom))' }}
       >
         {NAV_ITEMS.map(({ to, label, icon: Icon }) => {
           const isActive =
@@ -111,28 +133,21 @@ export const BottomNavigation: React.FC = () => {
               to={to}
               aria-label={label}
               aria-current={isActive ? 'page' : undefined}
-              className="flex-1 flex flex-col items-center justify-center py-2 gap-1 min-h-[64px] relative"
+              className="flex-1 flex flex-col items-center justify-center gap-[3px] min-h-[44px] py-1 relative"
             >
-              <div className="relative">
-                <Icon
-                  className={`w-6 h-6 transition-colors duration-200 ${
-                    isActive ? 'text-accent-primary' : 'text-text-secondary'
-                  }`}
-                />
-              </div>
+              <Icon
+                className={`w-5 h-5 transition-colors duration-200 ${
+                  isActive ? 'text-accent-primary' : 'text-icon-secondary'
+                }`}
+                strokeWidth={2}
+              />
               <span
-                className={`text-[11px] font-semibold transition-colors duration-200 ${
+                className={`text-[12px] font-semibold leading-none transition-colors duration-200 ${
                   isActive ? 'text-accent-primary' : 'text-text-secondary'
                 }`}
               >
                 {label}
               </span>
-              {isActive && (
-                <motion.div
-                  layoutId="nav-indicator"
-                  className="absolute top-0 left-1/2 -translate-x-1/2 w-6 h-[2px] bg-accent-primary rounded-full"
-                />
-              )}
             </Link>
           );
         })}

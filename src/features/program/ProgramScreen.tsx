@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ChevronRight, Pencil } from 'lucide-react';
 import { AppShell, ScreenHeader } from '@/components/layout';
-import { Button, EmptyState } from '@/components/ui';
+import { Button, EmptyState, IconButton } from '@/components/ui';
 import { programRepo, workoutRepo } from '@/db/repositories';
 import { getNextSessionId, getCurrentProgramWeek } from '@/lib/selectors';
 import { strings } from '@/lib/strings';
@@ -42,7 +42,7 @@ export const ProgramScreen: React.FC = () => {
   if (isLoading) {
     return (
       <AppShell>
-        <ScreenHeader title="La Mia Scheda" />
+        <ScreenHeader title="LA MIA SCHEDA" variant="display" titleSize="md" />
         <div className="flex-1 flex items-center justify-center">
           <div className="w-8 h-8 rounded-full border-2 border-accent-primary border-t-transparent animate-spin" />
         </div>
@@ -53,7 +53,7 @@ export const ProgramScreen: React.FC = () => {
   if (!program) {
     return (
       <AppShell>
-        <ScreenHeader title="La Mia Scheda" />
+        <ScreenHeader title="LA MIA SCHEDA" variant="display" titleSize="md" />
         <div className="flex-1 flex items-center justify-center px-5">
           <EmptyState
             title={strings.program.noProgram}
@@ -71,14 +71,15 @@ export const ProgramScreen: React.FC = () => {
     <AppShell>
       <ScreenHeader
         title={strings.program.title}
+        variant="display"
+        titleSize="md"
         rightAction={
-          <button
+          <IconButton
+            label="Modifica scheda"
             onClick={() => navigate(`/program/${program.id}/edit`)}
-            aria-label="Modifica scheda"
-            className="w-11 h-11 flex items-center justify-center text-text-secondary hover:text-text-primary transition-colors"
           >
-            <Pencil className="w-5 h-5" />
-          </button>
+            <Pencil className="w-5 h-5" strokeWidth={2} />
+          </IconButton>
         }
       />
 

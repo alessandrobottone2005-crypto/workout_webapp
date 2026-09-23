@@ -156,6 +156,7 @@ export const EditExerciseScreen: React.FC = () => {
       <ScreenHeader
         title={form.name.toUpperCase() || 'ESERCIZIO'}
         showBack
+        titleSize="lg"
       />
 
       <div className="flex-1 overflow-y-auto pb-[calc(120px+env(safe-area-inset-bottom))]">

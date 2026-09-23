@@ -62,7 +62,7 @@ export const SettingsScreen: React.FC = () => {
 
   return (
     <AppShell>
-      <ScreenHeader title={strings.settings.title} />
+      <ScreenHeader title={strings.settings.title} variant="display" titleSize="lg" />
 
       <div className="flex-1 overflow-y-auto pb-[calc(80px+env(safe-area-inset-bottom))]">
         <div className="px-5 pt-4 space-y-5">
@@ -171,7 +171,10 @@ export const SettingsScreen: React.FC = () => {
                 exit={{ opacity: 0, y: 20 }}
                 className="fixed bottom-24 left-1/2 -translate-x-1/2 bg-bg-elevated border border-border-default rounded-pill px-5 py-3 text-meta text-text-primary shadow-lg"
               >
-                ✓ Dati resettati
+                <span className="text-icon-accent" aria-hidden>
+                  ✓
+                </span>{' '}
+                Dati resettati
               </motion.div>
             )}
           </AnimatePresence>

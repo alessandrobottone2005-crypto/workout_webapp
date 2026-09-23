@@ -72,7 +72,7 @@ export const CalendarScreen: React.FC = () => {
 
   return (
     <AppShell>
-      <ScreenHeader title={strings.calendar.title} />
+      <ScreenHeader title={strings.calendar.title} variant="display" titleSize="lg" />
 
       <div className="flex-1 overflow-y-auto pb-[calc(80px+env(safe-area-inset-bottom))]">
         <div className="px-5 pt-4">

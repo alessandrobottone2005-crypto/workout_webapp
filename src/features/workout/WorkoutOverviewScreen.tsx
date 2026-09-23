@@ -24,7 +24,7 @@ import {
 import { CSS } from '@dnd-kit/utilities';
 import { Check, ChevronRight, GripVertical, X } from 'lucide-react';
 import { AppShell, ScreenHeader } from '@/components/layout';
-import { Button, ProgressBar, ConfirmDialog } from '@/components/ui';
+import { Button, ProgressBar, ConfirmDialog, IconButton } from '@/components/ui';
 import { useWorkoutStore } from '@/stores/workoutStore';
 import { workoutRepo } from '@/db/repositories';
 import { formatDuration } from '@/lib/formatters';
@@ -257,13 +257,13 @@ export const WorkoutOverviewScreen: React.FC = () => {
         onBack={() => navigate('/')}
         rightAction={
           !isReadOnly ? (
-            <button
+            <IconButton
+              label="Termina allenamento"
+              tone="danger"
               onClick={() => setShowCancelConfirm(true)}
-              aria-label="Termina allenamento"
-              className="w-11 h-11 flex items-center justify-center text-text-secondary hover:text-danger transition-colors"
             >
-              <X className="w-5 h-5" />
-            </button>
+              <X className="w-5 h-5" strokeWidth={2} />
+            </IconButton>
           ) : undefined
         }
       />
@@ -276,8 +276,9 @@ export const WorkoutOverviewScreen: React.FC = () => {
               {strings.workout.progress(completedCount, totalCount)}
             </p>
             {!isReadOnly && allCompleted && (
-              <span className="text-label-sm text-accent-primary">
-                COMPLETO ✓
+              <span className="inline-flex items-center gap-1 text-label-sm text-accent-primary">
+                COMPLETO
+                <Check className="w-3.5 h-3.5" strokeWidth={2.5} aria-hidden />
               </span>
             )}
           </div>

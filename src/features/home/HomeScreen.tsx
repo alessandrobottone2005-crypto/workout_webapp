@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ChevronRight, Dumbbell, TrendingUp, Settings } from 'lucide-react';
 import { AppShell } from '@/components/layout';
-import { Button, ProgressBar, EmptyState } from '@/components/ui';
+import { Button, ProgressBar, EmptyState, AppLogo, ScreenTitle, IconButton } from '@/components/ui';
 import { programRepo, workoutRepo } from '@/db/repositories';
 import { useWorkoutStore } from '@/stores/workoutStore';
 import { getNextSessionId, getWorkoutMetrics } from '@/lib/selectors';
@@ -95,27 +95,32 @@ export const HomeScreen: React.FC = () => {
   return (
     <AppShell>
       <div className="flex-1 overflow-y-auto pb-[calc(80px+env(safe-area-inset-bottom))]">
-        {/* Header Greeting */}
-        <div className="pt-[calc(env(safe-area-inset-top)+24px)] px-5 pb-6">
+        {/* Header: LogoDef + Greeting */}
+        <div className="pt-[calc(env(safe-area-inset-top)+16px)] px-5 pb-4">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
-            className="flex items-start justify-between gap-3"
+            className="flex flex-col gap-4"
           >
-            <div>
-              <h1 className="text-[32px] font-bold text-text-primary">{greeting}</h1>
-              <p className="text-body text-text-secondary mt-1">
-                {strings.home.subtitle}
-              </p>
+            <AppLogo width={156} />
+            <div className="flex items-start justify-between gap-3">
+              <div className="min-w-0">
+                <ScreenTitle size="lg" className="tracking-[-0.42px]">
+                  {greeting}
+                </ScreenTitle>
+                <p className="text-body text-text-secondary mt-1">
+                  {strings.home.subtitle}
+                </p>
+              </div>
+              <IconButton
+                label="Impostazioni"
+                onClick={() => navigate('/settings')}
+                className="-mr-2 -mt-1"
+              >
+                <Settings className="w-5 h-5" strokeWidth={2} />
+              </IconButton>
             </div>
-            <button
-              onClick={() => navigate('/settings')}
-              aria-label="Impostazioni"
-              className="w-11 h-11 -mr-2 -mt-1 flex items-center justify-center text-text-secondary hover:text-text-primary transition-colors"
-            >
-              <Settings className="w-5 h-5" />
-            </button>
           </motion.div>
         </div>
 
@@ -157,7 +162,7 @@ export const HomeScreen: React.FC = () => {
                 <p className="text-label-sm text-text-secondary mb-3">
                   {strings.home.todayLabel}
                 </p>
-                <h2 className="text-[28px] font-bold text-text-primary leading-tight">
+                <h2 className="screen-title text-[28px] leading-tight">
                   {nextSession.name.toUpperCase()}
                 </h2>
                 <p className="text-meta text-text-secondary mt-1">

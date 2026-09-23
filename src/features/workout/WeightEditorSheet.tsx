@@ -94,10 +94,12 @@ export const WeightEditorSheet: React.FC<WeightEditorSheetProps> = ({
 
         {/* Header */}
         <div className="px-5 pt-2 pb-4 border-b border-border-default">
-          <p className="text-label-sm text-text-secondary uppercase tracking-wider">
-            {exerciseName} • Serie {setNumber}
+          <p className="screen-title text-[26px] tracking-[-0.42px] uppercase">
+            {exerciseName}
           </p>
-          <p className="text-meta text-text-secondary mt-0.5">Modifica peso</p>
+          <p className="text-meta text-text-secondary mt-0.5">
+            Modifica peso · Serie {setNumber}
+          </p>
         </div>
 
         {/* Weight Display */}

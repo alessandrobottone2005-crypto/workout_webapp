@@ -53,7 +53,7 @@ export const ProgressScreen: React.FC = () => {
   if (isLoading) {
     return (
       <AppShell>
-        <ScreenHeader title={strings.progress.title} />
+        <ScreenHeader title={strings.progress.title} variant="display" titleSize="xl" />
         <div className="flex-1 flex items-center justify-center">
           <div className="w-8 h-8 rounded-full border-2 border-accent-primary border-t-transparent animate-spin" />
         </div>
@@ -64,7 +64,7 @@ export const ProgressScreen: React.FC = () => {
   if (completed.length === 0) {
     return (
       <AppShell>
-        <ScreenHeader title={strings.progress.title} />
+        <ScreenHeader title={strings.progress.title} variant="display" titleSize="xl" />
         <div className="flex-1 flex items-center justify-center px-5">
           <EmptyState
             title="Nessun dato ancora"
@@ -77,7 +77,7 @@ export const ProgressScreen: React.FC = () => {
 
   return (
     <AppShell>
-      <ScreenHeader title={strings.progress.title} />
+      <ScreenHeader title={strings.progress.title} variant="display" titleSize="xl" />
 
       <div className="flex-1 overflow-y-auto pb-[calc(80px+env(safe-area-inset-bottom))]">
         <div className="px-5 pt-4 space-y-5">

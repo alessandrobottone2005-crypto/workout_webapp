@@ -22,6 +22,12 @@ export default {
         accent: {
           primary: '#C8FF3D',
         },
+        icon: {
+          primary: '#F5F5F7',
+          secondary: '#8E8E93',
+          accent: '#C8FF3D',
+          'on-accent': '#09090A',
+        },
         danger: '#FF453A',
         warning: '#FFD60A',
       },
@@ -33,10 +39,13 @@ export default {
           '"SF Pro Text"',
           'sans-serif',
         ],
+        display: ['Syne', 'sans-serif'],
       },
       fontSize: {
         'display': ['40px', { fontWeight: '700', lineHeight: '1.1' }],
-        'title': ['28px', { fontWeight: '700', lineHeight: '1.2' }],
+        'title': ['28px', { fontWeight: '800', lineHeight: '1.15', letterSpacing: '-0.015em' }],
+        'title-sm': ['26px', { fontWeight: '800', lineHeight: '1.15', letterSpacing: '-0.015em' }],
+        'title-lg': ['30px', { fontWeight: '800', lineHeight: '1.15', letterSpacing: '-0.015em' }],
         'heading': ['20px', { fontWeight: '600', lineHeight: '1.3' }],
         'body': ['16px', { fontWeight: '400', lineHeight: '1.5' }],
         'meta': ['14px', { fontWeight: '500', lineHeight: '1.4' }],

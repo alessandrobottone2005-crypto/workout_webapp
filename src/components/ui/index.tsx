@@ -6,6 +6,98 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Loader2 } from 'lucide-react';
+import logoUrl from '@/assets/brand/workout-lab-logo.svg';
+
+/* ============================================
+   APP LOGO — Brand LogoDef (Figma 156×47)
+   ============================================ */
+
+interface AppLogoProps {
+  width?: number;
+  className?: string;
+}
+
+export const AppLogo: React.FC<AppLogoProps> = ({
+  width = 156,
+  className = '',
+}) => (
+  <img
+    src={logoUrl}
+    alt="Workout Lab"
+    width={width}
+    height={Math.round(width * (46.886 / 156))}
+    className={`block ${className}`}
+    draggable={false}
+  />
+);
+
+/* ============================================
+   SCREEN TITLE — Syne ExtraBold display title
+   ============================================ */
+
+type ScreenTitleSize = 'sm' | 'md' | 'lg' | 'xl';
+
+interface ScreenTitleProps {
+  children: React.ReactNode;
+  size?: ScreenTitleSize;
+  className?: string;
+  as?: 'h1' | 'h2';
+}
+
+const titleSizes: Record<ScreenTitleSize, string> = {
+  sm: 'text-[24px]',
+  md: 'text-[26px]',
+  lg: 'text-[28px]',
+  xl: 'text-[30px]',
+};
+
+export const ScreenTitle: React.FC<ScreenTitleProps> = ({
+  children,
+  size = 'lg',
+  className = '',
+  as: Tag = 'h1',
+}) => (
+  <Tag className={`screen-title ${titleSizes[size]} ${className}`}>
+    {children}
+  </Tag>
+);
+
+/* ============================================
+   ICON BUTTON — 44×44 hit target, 24px icon
+   ============================================ */
+
+interface IconButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  label: string;
+  children: React.ReactNode;
+  tone?: 'default' | 'accent' | 'danger';
+}
+
+export const IconButton: React.FC<IconButtonProps> = ({
+  label,
+  children,
+  tone = 'default',
+  className = '',
+  ...props
+}) => {
+  const tones = {
+    default: 'text-icon-secondary hover:text-icon-primary active:text-icon-primary',
+    accent: 'text-icon-accent hover:brightness-110',
+    danger: 'text-danger hover:opacity-80',
+  };
+
+  return (
+    <button
+      type="button"
+      aria-label={label}
+      title={label}
+      className={`w-11 h-11 flex items-center justify-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-primary rounded-full ${tones[tone]} ${className}`}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+};
 
 /* ============================================
    BUTTON COMPONENTS
